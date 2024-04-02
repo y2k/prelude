@@ -2,6 +2,8 @@
 
 (defmacro println [& args] (concat (list 'console/info) args))
 
+(defmacro def- [k v] (list 'def ^:private k v))
+
 (defmacro FIXME [& args]
   (list 'throw
         (list 'Error.
