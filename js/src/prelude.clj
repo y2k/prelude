@@ -17,3 +17,8 @@
 (defmacro jvm! [& body] (list 'comment body))
 
 (defmacro js! [& body] (concat (list 'module) body))
+
+(defmacro atom [x] (list 'RT/atom x))
+(defmacro deref [x] (list 'RT/deref x))
+(defmacro reset! [a x] (list 'RT/reset a x))
+(defmacro swap! [a f] (list 'RT/swap a f))
