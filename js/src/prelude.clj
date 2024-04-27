@@ -1,6 +1,7 @@
 (defmacro do [& body] (concat (list 'let (vector)) body))
 
-(defmacro println [& args] (concat (list '.info 'console) args))
+(defmacro println [& args] (concat (list 'console/info) args))
+(defmacro eprintln [& args] (concat (list 'console/error) args))
 
 (defmacro def- [k v] (list 'def ^:private k v))
 
