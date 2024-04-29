@@ -63,3 +63,4 @@
 (def Promise null)
 (def RegExp null)
 (def setTimeout null)
+(def window null)
