@@ -47,3 +47,5 @@
 
 ;; HTML
 (def console null)
+(def JSON null)
+(def Promise null)
