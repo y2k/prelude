@@ -36,6 +36,11 @@ public class RT {
     throw (T) exception;
   }
 
+  public static <T> T throw_(Object exception) {
+    throwException((Throwable) exception, null);
+    return null;
+  }
+
   public static <T> T try_(Callable<T> f) {
     try {
       return f.call();

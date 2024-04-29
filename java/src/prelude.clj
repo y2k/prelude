@@ -10,6 +10,8 @@
 
 (defmacro get [target key] (list 'y2k.RT/get target key))
 
+(defmacro throw [e] (list 'y2k.RT/throw_ e))
+
 (defmacro println [& xs] (list 'do (list 'System.out/println (concat (list 'str) xs)) 'null))
 
 (defmacro js! [& body] (list 'comment body))
