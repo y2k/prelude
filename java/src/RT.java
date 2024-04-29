@@ -1,6 +1,7 @@
 package y2k;
 
 import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
 public class RT {
 
@@ -48,5 +49,9 @@ public class RT {
       RT.throwException(e, null);
       return null;
     }
+  }
+
+  public static Runnable runnable(Supplier<Object> f) {
+    return f::get;
   }
 }

@@ -19,3 +19,5 @@
 (defmacro jvm! [& body] (concat (list 'module) body))
 
 (defmacro def- [k v] (list 'def ^:private k v))
+
+(defmacro runnable [f] (list 'y2k.RT/runnable f))
