@@ -49,7 +49,10 @@
 
 ;; HTML
 (def Array null)
+(def Buffer null)
 (def console null)
+(def crypto null)
+(def Date null)
 (def document null)
 (def eval null)
 (def fetch null)
@@ -57,4 +60,5 @@
 (def Object null)
 (def parseInt null)
 (def Promise null)
+(def RegExp null)
 (def setTimeout null)
