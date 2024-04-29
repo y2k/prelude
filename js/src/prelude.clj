@@ -54,6 +54,7 @@
 (def eval null)
 (def fetch null)
 (def JSON null)
+(def Object null)
 (def parseInt null)
 (def Promise null)
 (def setTimeout null)
