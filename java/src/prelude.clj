@@ -15,3 +15,5 @@
 (defmacro js! [& body] (list 'comment body))
 
 (defmacro jvm! [& body] (concat (list 'module) body))
+
+(defmacro def- [k v] (list 'def ^:private k v))
