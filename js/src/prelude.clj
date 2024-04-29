@@ -59,6 +59,7 @@
 (def JSON null)
 (def Object null)
 (def parseInt null)
+(def process null)
 (def Promise null)
 (def RegExp null)
 (def setTimeout null)
