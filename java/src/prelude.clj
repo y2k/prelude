@@ -1,6 +1,6 @@
 (defmacro not= [a b] (list 'not (list '= a b)))
 
-(defmacro gen-class [& body] (list '__inject_raw_sexp (concat (list 'gen-class) body)))
+(defmacro gen-class [& body] (list '__inject_raw_sexp (list 'gen-class* (quote body))))
 
 (defmacro fn! [& body] (concat (list ^void 'fn) body))
 
@@ -12,7 +12,7 @@
 
 (defmacro throw [e] (list 'y2k.RT/throw_ e))
 
-(defmacro println [& xs] (list 'do (list 'System.out/println (concat (list 'str) xs)) 'null))
+(defmacro println [& xs] (list 'do (concat (list 'y2k.RT/println) xs)))
 
 (defmacro js! [& body] (list 'comment body))
 
@@ -21,3 +21,23 @@
 (defmacro def- [k v] (list 'def ^:private k v))
 
 (defmacro runnable [f] (list 'y2k.RT/runnable f))
+
+(defmacro is [instance class] (list '__inject_raw_sexp (list 'is instance (quote class))))
+(defmacro as [instance class] (list '__inject_raw_sexp (list 'as instance (quote class))))
+(defmacro class [cls_name] (list '__inject_raw_sexp (list 'class (quote cls_name))))
+
+;; Declarations
+
+(def as null)
+(def class null)
+(def gen-class* null)
+(def get null)
+(def hash-map null)
+(def is null)
+(def not null)
+(def vector null)
+
+;; Default java imports (FIXME)
+
+(def Object null)
+(def String null)

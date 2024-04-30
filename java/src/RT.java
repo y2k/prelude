@@ -51,6 +51,14 @@ public class RT {
     }
   }
 
+  public static void println(Object... xs) {
+    for (Object x : xs) {
+      System.out.print(x);
+      System.out.print(" ");
+    }
+    System.out.println();
+  }
+
   public static Runnable runnable(Supplier<Object> f) {
     return f::get;
   }
