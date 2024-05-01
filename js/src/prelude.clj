@@ -19,10 +19,10 @@
 
 (defmacro js! [& body] (concat (list 'module) body))
 
-(defmacro atom [x] (list 'RT/atom x))
-(defmacro deref [x] (list 'RT/deref x))
-(defmacro reset! [a x] (list 'RT/reset a x))
-(defmacro swap! [a f] (list 'RT/swap a f))
+(defmacro atom [x] (list '.of 'Array x))
+(defmacro deref [x] (list 'get x 0))
+(defmacro reset! [a x] (list 'do (list '.fill a x) x))
+(defmacro swap! [a f] (list 'get (list '.splice a 0 1 (list f (list 'get a 0))) 0))
 
 (defmacro not= [a b] (list 'not (list '= a b)))
 
@@ -49,6 +49,7 @@
 
 ;; HTML
 (def Array null)
+(def alert null)
 (def Buffer null)
 (def console null)
 (def crypto null)
@@ -57,6 +58,7 @@
 (def eval null)
 (def fetch null)
 (def JSON null)
+(def Math null)
 (def Object null)
 (def parseInt null)
 (def process null)
