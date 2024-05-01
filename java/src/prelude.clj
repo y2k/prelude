@@ -22,18 +22,18 @@
 
 (defmacro runnable [f] (list 'y2k.RT/runnable f))
 
-(defmacro is [instance class] (list 'is* instance (quote class)))
-(defmacro as [instance class] (list 'as* instance (quote class)))
+(defmacro as [instance class] (list 'as* instance class))
+(defmacro is [instance class] (list 'is* instance class))
 (defmacro class [cls_name] (list '__inject_raw_sexp (list 'class (quote cls_name))))
 
 ;; Declarations
 
-(def as null)
+(def as* null)
 (def class null)
 (def gen-class* null)
 (def get null)
 (def hash-map null)
-(def is null)
+(def is* null)
 (def not null)
 (def vector null)
 
