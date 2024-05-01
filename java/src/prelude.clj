@@ -22,8 +22,8 @@
 
 (defmacro runnable [f] (list 'y2k.RT/runnable f))
 
-(defmacro is [instance class] (list '__inject_raw_sexp (list 'is instance (quote class))))
-(defmacro as [instance class] (list '__inject_raw_sexp (list 'as instance (quote class))))
+(defmacro is [instance class] (list 'is* instance (quote class)))
+(defmacro as [instance class] (list 'as* instance (quote class)))
 (defmacro class [cls_name] (list '__inject_raw_sexp (list 'class (quote cls_name))))
 
 ;; Declarations
