@@ -39,5 +39,6 @@
 
 ;; Default java imports (FIXME)
 
+(def ClassLoader null)
 (def Object null)
 (def String null)
