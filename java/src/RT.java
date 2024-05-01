@@ -51,12 +51,13 @@ public class RT {
     }
   }
 
-  public static void println(Object... xs) {
+  public static Object println(Object... xs) {
     for (Object x : xs) {
       System.out.print(x);
       System.out.print(" ");
     }
     System.out.println();
+    return null;
   }
 
   public static Runnable runnable(Supplier<Object> f) {
