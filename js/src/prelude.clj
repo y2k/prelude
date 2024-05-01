@@ -28,6 +28,7 @@
 
 ;; JS prelude
 (def __unsafe_insert_js null)
+(def alert null)
 (def and null)
 (def assoc null)
 (def assoc! null)
@@ -57,6 +58,7 @@
 (def eval null)
 (def fetch null)
 (def JSON null)
+(def Math null)
 (def Object null)
 (def parseInt null)
 (def process null)
