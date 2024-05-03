@@ -12,7 +12,7 @@
 
 (defmacro throw [e] (list 'y2k.RT/throw_ e))
 
-(defmacro println [& xs] (list 'do (concat (list 'y2k.RT/println) xs)))
+(defmacro println [& xs] (concat (list 'y2k.RT/println) xs))
 
 (defmacro js! [& body] (list 'comment body))
 
@@ -26,19 +26,22 @@
 (defmacro is [instance class] (list 'is* instance class))
 (defmacro class [cls_name] (list '__inject_raw_sexp (list 'class (quote cls_name))))
 
+(defmacro vector [& xs] (concat (list 'java.util.List/of) xs))
+(defmacro hash-map [& xs] (concat (list 'java.util.Map/of) xs))
+
+(defmacro class [cls] (list 'quote (symbol (str cls ".class"))))
+(defmacro do [& xs] (concat (list 'let (vector)) xs))
+
 ;; Declarations
 
 (def as* null)
-(def class null)
-(def gen-class* null)
 (def get null)
-(def hash-map null)
 (def is* null)
 (def not null)
-(def vector null)
+(def unit null)
 
 ;; Default java imports (FIXME)
 
-(def ClassLoader null)
-(def Object null)
+;; (def ClassLoader null)
+;; (def Object null)
 (def String null)

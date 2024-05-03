@@ -49,13 +49,14 @@
 (def vector null)
 
 ;; HTML
-(def Array null)
 (def alert null)
+(def Array null)
 (def Buffer null)
 (def console null)
 (def crypto null)
 (def Date null)
 (def document null)
+(def Error null)
 (def eval null)
 (def fetch null)
 (def JSON null)
@@ -65,5 +66,6 @@
 (def process null)
 (def Promise null)
 (def RegExp null)
+(def Response null)
 (def setTimeout null)
 (def window null)
