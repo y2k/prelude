@@ -35,6 +35,7 @@
 ;; Declarations
 
 (def as* null)
+(def gen-class* null)
 (def get null)
 (def is* null)
 (def not null)
