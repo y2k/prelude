@@ -28,7 +28,7 @@
 (def transform_nodes 0)
 (def hash-map 0)
 
-(defn make_operator [sep xs]
+(defn- make_operator [sep xs]
   (concat
    (list '__raw_template "(")
    (transform_nodes {:sep sep} xs)
