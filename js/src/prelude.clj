@@ -26,7 +26,6 @@
 (def concat 0)
 (def list 0)
 (def transform_nodes 0)
-(def hash-map 0)
 
 (defn- make_operator [sep xs]
   (concat
@@ -69,7 +68,6 @@
 (def do 0)
 (def false 0)
 (def fn* 0)
-(def hash-map 0)
 (def let* 0)
 (def new 0)
 (def null 0)

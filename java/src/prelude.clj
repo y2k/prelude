@@ -26,8 +26,6 @@
 (defmacro is [instance class] (list 'is* instance class))
 (defmacro class [cls_name] (list '__inject_raw_sexp (list 'class (quote cls_name))))
 
-(defmacro hash-map [& xs] (concat (list 'java.util.Map/of) xs))
-
 (defmacro class [cls] (list 'quote (symbol (str cls ".class"))))
 (defmacro do [& xs] (concat (list 'let (vector)) xs))
 
