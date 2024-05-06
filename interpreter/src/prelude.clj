@@ -3,6 +3,7 @@
 (def = 0)
 (def concat 0)
 (def false 0)
+(def get 0)
 (def if 0)
 (def list 0)
 (def str 0)
