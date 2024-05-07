@@ -15,6 +15,7 @@
 (defmacro jvm! [& body] (list 'comment body))
 (defmacro not= [a b] (list 'not (list '= a b)))
 (defmacro println [& args] (concat (list '.info 'console) args))
+(defmacro rest [xs] (list '.toSpliced (list '.from 'Array xs) 0 1))
 (defmacro second [xs] (list 'get (list '.from 'Array xs) 1))
 (defmacro str [& args] (concat (list '+ "") args))
 
@@ -53,13 +54,12 @@
 (defmacro get [target index] (list '__raw_template "" target "[" index "]"))
 (defmacro if [c a b] (list '__raw_template "(" c " ? " a " : " b ")"))
 (defmacro merge [a b] (list '__raw_template "{ ..." a ", ..." b " }"))
+(defmacro nil? [x] (list 'or (list '= 'null x) (list '= 'undefined x)))
 (defmacro not [x] (list '__raw_template "!(" x ")"))
 (defmacro set! [target value] (list '__raw_template "(" target " = " value ");"))
 (defmacro spread [a] (list '__raw_template "..." a))
 (defmacro throw [ex] (list '__raw_template "(function(){throw " ex "})()"))
 (defmacro type [x] (list '__raw_template "typeof " x))
-
-(defmacro nil? [x] (or (= null x) (= null x)))
 
 ;; JS prelude
 (def __raw_template 0)
@@ -104,12 +104,19 @@
 
 ;; Effects
 
-(defn- fx* [env key args]
-  (let [eff (get env key)]
-    (eff args)))
+;; (defn- fx* [env key args]
+;;   (let [eff (get env key)]
+;;     (eff args)))
 
-(defmacro fx [env key & args]
-  (list 'fx* env key (vec args)))
+;; (defmacro fx [env key & args]
+;;   (list 'fx* env key (vec args)))
+
+;; (defn fx [env key args]
+;;   (let [eff (get env key)]
+;;     (eff args)))
+
+(defmacro fx! [key arg]
+  (list (list 'get __env key) arg))
 
 (defmacro defn! [name args & body]
   (concat (list 'defn name (vec (concat (list '__env) args))) body))
