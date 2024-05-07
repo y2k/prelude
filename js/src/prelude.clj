@@ -98,3 +98,16 @@
 (def Response 0)
 (def setTimeout 0)
 (def window 0)
+
+;; Effects
+(defn- fx* [env key args]
+  (let [eff (get env key)]
+    (eff args)))
+
+(defmacro fx [env key & args]
+  (list 'fx* env key (vec args)))
+
+(defmacro defn! [name args & body]
+  (concat (list 'defn name (vec (concat (list '__env) args))) body))
+
+(defmacro resolve_env [] 'env)
