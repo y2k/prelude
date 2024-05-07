@@ -59,6 +59,8 @@
 (defmacro throw [ex] (list '__raw_template "(function(){throw " ex "})()"))
 (defmacro type [x] (list '__raw_template "typeof " x))
 
+(defmacro nil? [x] (or (= null x) (= null x)))
+
 ;; JS prelude
 (def __raw_template 0)
 (def . 0)
@@ -97,4 +99,19 @@
 (def RegExp 0)
 (def Response 0)
 (def setTimeout 0)
+(def undefined 0)
 (def window 0)
+
+;; Effects
+
+(defn- fx* [env key args]
+  (let [eff (get env key)]
+    (eff args)))
+
+(defmacro fx [env key & args]
+  (list 'fx* env key (vec args)))
+
+(defmacro defn! [name args & body]
+  (concat (list 'defn name (vec (concat (list '__env) args))) body))
+
+(defmacro resolve_env [] '__env)
