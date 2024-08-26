@@ -15,13 +15,18 @@
 (defmacro jvm! [& body] (list 'comment body))
 (defmacro not= [a b] (list 'not (list '= a b)))
 (defmacro println [& args] (concat (list '.info 'console) args))
+(defmacro rest [xs] (list '.toSpliced xs 0 1))
 (defmacro second [xs] (list 'get (list '.from 'Array xs) 1))
 (defmacro str [& args] (concat (list '+ "") args))
+(defmacro nil? [x] (list '__raw_template "" x " == null"))
+(defmacro some? [x] (list 'not (list 'nil? x)))
 
 (defmacro atom [x] (list '.of 'Array x))
 (defmacro deref [x] (list 'get x 0))
 (defmacro reset! [a x] (list 'do (list '.fill a x) x))
 (defmacro swap! [a f] (list 'get (list '.splice a 0 1 (list f (list 'get a 0))) 0))
+
+(defmacro empty? [xs] (list '= 0 (list '.-length xs)))
 
 (def concat 0)
 (def list 0)
@@ -49,6 +54,7 @@
 (defmacro assoc! [col key value] (list '__raw_template "" col "[" key "]=" value))
 (defmacro concat [a b] (list '__raw_template "[..." a ", ..." b "]"))
 (defmacro conj [a b] (list '__raw_template "[..." a ", " b "]"))
+(defmacro cons [a b] (list '__raw_template "[" a ", ..." b "]"))
 (defmacro export-default [body] (list '__raw_template "export default " (list 'quote body)))
 (defmacro get [target index] (list '__raw_template "" target "[" index "]"))
 (defmacro if [c a b] (list '__raw_template "(" c " ? " a " : " b ")"))
