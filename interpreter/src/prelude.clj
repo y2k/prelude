@@ -1,4 +1,6 @@
+(def - 0)
 (def * 0)
+(def / 0)
 (def + 0)
 (def = 0)
 (def concat 0)
