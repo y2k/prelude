@@ -105,6 +105,13 @@
 (def setTimeout 0)
 (def window 0)
 
+;; Debug
+
+(defmacro DEBUG [message value]
+  (list 'do
+        (list 'eprintln message value)
+        value))
+
 ;; Effects
 (defn- fx* [env key args]
   (let [eff (get env key)]
