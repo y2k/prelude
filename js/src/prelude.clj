@@ -95,6 +95,7 @@
 (def Error 0)
 (def eval 0)
 (def fetch 0)
+(def globalThis 0)
 (def JSON 0)
 (def Math 0)
 (def Object 0)
