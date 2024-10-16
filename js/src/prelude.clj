@@ -20,6 +20,19 @@
 (defmacro str [& args] (concat (list '+ "") args))
 (defmacro nil? [x] (list '__raw_template "" x " == null"))
 (defmacro some? [x] (list 'not (list 'nil? x)))
+(defmacro string? [x] (list '= :string (list 'type x)))
+(defmacro number? [x] (list '= :number (list 'type x)))
+(defmacro seq? [x] (list 'Array.isArray x))
+(defmacro map? [x] (list '__raw_template "(" x " instanceof Map)"))
+;; (defmacro reduce [xs f init] (list '.reduce xs f init))
+(defmacro reduce [xs f init]
+  (list '__raw_template
+        "(function() {
+          const xs=" xs ";
+          const f=" f ";
+          const init=" init ";
+          if (Array.isArray(xs)){return xs.reduce(f,init)}
+          else{return Object.entries(xs).reduce(f,init)}})()"))
 
 (defmacro atom [x] (list '.of 'Array x))
 (defmacro deref [x] (list 'get x 0))
@@ -83,6 +96,18 @@
 (def try 0)
 (def vector 0)
 (def while 0)
+(def set 0)
+
+(defmacro vector [& args]
+  (concat
+   (list '__raw_template "[")
+   (transform_nodes {:sep ","} args)
+   (list "]")))
+
+(defmacro list [& args]
+  (list 'let ['xs (concat (list 'vector) args)]
+        (list 'set! (list '.-__y2k_type 'xs) :list)
+        'xs))
 
 ;; HTML
 (def alert 0)
