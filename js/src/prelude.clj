@@ -68,7 +68,7 @@
 (defmacro concat [a b] (list '__raw_template "[..." a ", ..." b "]"))
 (defmacro conj [a b] (list '__raw_template "[..." a ", " b "]"))
 (defmacro cons [a b] (list '__raw_template "[" a ", ..." b "]"))
-(defmacro export-default [body] (list '__raw_template "export default " (list 'quote body)))
+(defmacro export-default [body] (list '__raw_template "export default " body))
 (defmacro get [target index] (list '__raw_template "" target "[" index "]"))
 (defmacro if [c a b] (list '__raw_template "(" c " ? " a " : " b ")"))
 (defmacro merge [a b] (list '__raw_template "{ ..." a ", ..." b " }"))
@@ -98,6 +98,13 @@
 (def while 0)
 (def set 0)
 
+(defmacro quote [n]
+  {:__y2k_type :quote
+   :value (str n)})
+
+(defmacro quote? [x]
+  (list '= :quote (list '.-__y2k_type x)))
+
 (defmacro vector [& args]
   (concat
    (list '__raw_template "[")
@@ -108,6 +115,9 @@
   (list 'let ['xs (concat (list 'vector) args)]
         (list 'set! (list '.-__y2k_type 'xs) :list)
         'xs))
+
+(defmacro list? [x]
+  (list '= :list (list '.-__y2k_type x)))
 
 ;; HTML
 (def alert 0)
