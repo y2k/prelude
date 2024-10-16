@@ -91,6 +91,7 @@
 (def console 0)
 (def crypto 0)
 (def Date 0)
+(def debugger 0)
 (def document 0)
 (def Error 0)
 (def eval 0)
@@ -114,11 +115,3 @@
   (list 'do
         (list 'eprintln message value)
         value))
-
-(defmacro fx! [key arg]
-  (list (list 'get __env key) arg))
-
-(defmacro defn! [name args & body]
-  (concat (list 'defn name (vec (concat (list '__env) args))) body))
-
-(defmacro resolve_env [] '__env)
