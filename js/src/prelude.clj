@@ -55,7 +55,7 @@
 (defmacro concat [a b] (list '__raw_template "[..." a ", ..." b "]"))
 (defmacro conj [a b] (list '__raw_template "[..." a ", " b "]"))
 (defmacro cons [a b] (list '__raw_template "[" a ", ..." b "]"))
-(defmacro export-default [body] (list '__raw_template "export default " (list 'quote body)))
+(defmacro export-default [body] (list '__raw_template "export default " body))
 (defmacro get [target index] (list '__raw_template "" target "[" index "]"))
 (defmacro if [c a b] (list '__raw_template "(" c " ? " a " : " b ")"))
 (defmacro merge [a b] (list '__raw_template "{ ..." a ", ..." b " }"))
@@ -114,19 +114,6 @@
   (list 'do
         (list 'eprintln message value)
         value))
-
-;; Effects
-
-;; (defn- fx* [env key args]
-;;   (let [eff (get env key)]
-;;     (eff args)))
-
-;; (defmacro fx [env key & args]
-;;   (list 'fx* env key (vec args)))
-
-;; (defn fx [env key args]
-;;   (let [eff (get env key)]
-;;     (eff args)))
 
 (defmacro fx! [key arg]
   (list (list 'get __env key) arg))
