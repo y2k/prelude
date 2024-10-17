@@ -1,6 +1,6 @@
 (defmacro not= [a b] (list 'not (list '= a b)))
 
-(defmacro gen-class [& body] (list '__inject_raw_sexp (list 'gen-class* (quote body))))
+(defmacro gen-class [& body] (list '__inject_raw_sexp (list 'gen-class* (list 'quote body))))
 
 (defmacro fn! [& body] (concat (list ^void 'fn) body))
 
