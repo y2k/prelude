@@ -102,6 +102,10 @@
   {:__y2k_type :quote
    :value (str n)})
 
+(defmacro quote_of_string [n]
+  {:__y2k_type :quote
+   :value n})
+
 (defmacro quote? [x]
   (list '= :quote (list '.-__y2k_type x)))
 
