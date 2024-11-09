@@ -13,6 +13,10 @@
 (defmacro str [& xs] (concat (list 'y2k.RT/str) xs))
 (defmacro throw [e] (list 'y2k.RT/throw_ e))
 
+(defmacro atom [x] (list 'java.util.concurrent.atomic.AtomicReference. x))
+(defmacro deref [x] (list '.get x))
+(defmacro reset! [a x] (list '.set a x))
+
 ;; Java interop
 
 (defmacro as [instance class] (list 'as* instance class))

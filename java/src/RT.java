@@ -5,6 +5,16 @@ import java.util.function.Supplier;
 
 public class RT {
 
+  public static Object[] into_array(Object xs) {
+    var items = (Iterable<?>) xs;
+    var array = new Object[items.iterator().count()];
+    var i = 0;
+    for (var x : items) {
+      array[i++] = x;
+    }
+    return array;
+  }
+
   public static String str(Object... args) {
     if (args.length == 1) {
       return args[0].toString();
