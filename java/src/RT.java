@@ -1,9 +1,19 @@
 package y2k;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 public class RT {
+
+  public static Object[] into_array(Object xs) {
+    var col = (List<Object>) xs;
+    var result = (Object[]) Array.newInstance(col.get(0).getClass(), col.size());
+    return col.toArray(result);
+  }
 
   public static String str(Object... args) {
     if (args.length == 1) {
@@ -31,9 +41,8 @@ public class RT {
 
   @SuppressWarnings("unchecked")
   private static <T extends Throwable> void throwException(
-    Throwable exception,
-    Object dummy
-  ) throws T {
+      Throwable exception,
+      Object dummy) throws T {
     throw (T) exception;
   }
 
