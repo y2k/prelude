@@ -1,35 +1,28 @@
-(defmacro not= [a b] (list 'not (list '= a b)))
-
-(defmacro gen-class [& body] (list '__inject_raw_sexp (list 'gen-class* (list 'quote body))))
-
-(defmacro fn! [& body] (concat (list ^void 'fn) body))
-
-(defmacro str [& xs] (concat (list 'y2k.RT/str) xs))
-
-(defmacro checked! [f] (list 'y2k.RT/try_ (list 'fn (vector) f)))
-
-(defmacro get [target key] (list 'y2k.RT/get target key))
-
-(defmacro throw [e] (list 'y2k.RT/throw_ e))
-
-(defmacro println [& xs] (concat (list 'y2k.RT/println) xs))
-
-(defmacro js! [& body] (list 'comment body))
-
-(defmacro jvm! [& body] (concat (list 'module) body))
-
-(defmacro def- [k v] (list 'def ^:private k v))
-
-(defmacro runnable [f] (list 'y2k.RT/runnable f))
-
-(defmacro as [instance class] (list 'as* instance class))
-(defmacro is [instance class] (list 'is* instance class))
-(defmacro class [cls_name] (list '__inject_raw_sexp (list 'class (quote cls_name))))
-
-(defmacro class [cls] (list 'quote (symbol (str cls ".class"))))
-(defmacro do [& xs] (concat (list 'let (vector)) xs))
+;; Common
 
 (defmacro = [a b] (list 'java.util.Objects/equals a b))
+(defmacro def- [k v] (list 'def ^:private k v))
+(defmacro do [& xs] (concat (list 'let (vector)) xs))
+(defmacro get [target key] (list 'y2k.RT/get target key))
+(defmacro into-array [xs] (list 'y2k.RT/into_array xs))
+(defmacro is [instance class] (list 'is* instance class))
+(defmacro js! [& body] (list 'comment body))
+(defmacro jvm! [& body] (concat (list 'module) body))
+(defmacro not= [a b] (list 'not (list '= a b)))
+(defmacro println [& xs] (concat (list 'y2k.RT/println) xs))
+(defmacro str [& xs] (concat (list 'y2k.RT/str) xs))
+(defmacro throw [e] (list 'y2k.RT/throw_ e))
+
+;; Java interop
+
+(defmacro as [instance class] (list 'as* instance class))
+(defmacro checked! [f] (list 'y2k.RT/try_ (list 'fn (vector) f)))
+(defmacro fn! [& body] (concat (list ^void 'fn) body))
+(defmacro gen-class [& body] (list '__inject_raw_sexp (list 'gen-class* (list 'quote body))))
+(defmacro runnable [f] (list 'y2k.RT/runnable f))
+
+(defmacro class [cls_name] (list '__inject_raw_sexp (list 'class (quote cls_name))))
+(defmacro class [cls] (list 'quote (symbol (str cls ".class"))))
 
 ;; Declarations
 
@@ -64,7 +57,7 @@
 (def unit 0)
 (def while 0)
 
-;; Default java imports (FIXME)
+;; Declarations Java
 
 ;; (def ClassLoader 0)
 ;; (def Object 0)
