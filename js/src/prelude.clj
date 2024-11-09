@@ -126,8 +126,10 @@
 ;; HTML
 (def alert 0)
 (def Array 0)
+(def BarcodeDetector 0)
 (def Buffer 0)
 (def console 0)
+(def createImageBitmap 0)
 (def crypto 0)
 (def Date 0)
 (def debugger 0)
