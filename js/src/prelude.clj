@@ -139,6 +139,7 @@
 (def fetch 0)
 (def globalThis 0)
 (def JSON 0)
+(def localStorage 0)
 (def Math 0)
 (def Object 0)
 (def parseInt 0)
