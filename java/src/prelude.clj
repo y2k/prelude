@@ -55,6 +55,7 @@
 (def not 0)
 (def null 0)
 (def quote 0)
+(def set! 0)
 (def throw 0)
 (def true 0)
 (def try 0)
