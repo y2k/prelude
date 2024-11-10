@@ -11,7 +11,7 @@
 (defmacro do [& body] (concat (list 'let (vector)) body))
 (defmacro eprintln [& args] (concat (list '.error 'console) args))
 (defmacro first [xs] (list 'get (list '.from 'Array xs) 0))
-(defmacro js! [& body] (concat (list 'module) body))
+(defmacro js! [& body] (concat (list 'do) body))
 (defmacro jvm! [& body] (list 'comment body))
 (defmacro not= [a b] (list 'not (list '= a b)))
 (defmacro println [& args] (concat (list '.info 'console) args))
@@ -34,7 +34,7 @@
           if (Array.isArray(xs)){return xs.reduce(f,init)}
           else{return Object.entries(xs).reduce(f,init)}})()"))
 
-(defmacro atom [x] (list '.of 'Array x))
+(defmacro atom [x] (vector x))
 (defmacro deref [x] (list 'get x 0))
 (defmacro reset! [a x] (list 'do (list '.fill a x) x))
 (defmacro swap! [a f] (list 'get (list '.splice a 0 1 (list f (list 'get a 0))) 0))
@@ -70,12 +70,12 @@
 (defmacro cons [a b] (list '__raw_template "[" a ", ..." b "]"))
 (defmacro export-default [body] (list '__raw_template "export default " body))
 (defmacro get [target index] (list '__raw_template "" target "[" index "]"))
-(defmacro if [c a b] (list '__raw_template "(" c " ? " a " : " b ")"))
+;; (defmacro if [c a b] (list '__raw_template "(" c " ? " a " : " b ")"))
 (defmacro merge [a b] (list '__raw_template "{ ..." a ", ..." b " }"))
 (defmacro nil? [x] (list 'or (list '= 'null x) (list '= 'undefined x)))
 (defmacro not [x] (list '__raw_template "!(" x ")"))
-(defmacro set! [target value] (list '__raw_template "(" target " = " value ");"))
-(defmacro spread [a] (list '__raw_template "..." a))
+;; (defmacro set! [target value] (list '__raw_template "(" target " = " value ");"))
+;; (defmacro spread [a] (list '__raw_template "..." a))
 (defmacro throw [ex] (list '__raw_template "(function(){throw " ex "})()"))
 (defmacro type [x] (list '__raw_template "typeof " x))
 

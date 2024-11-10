@@ -7,7 +7,7 @@
 (defmacro into-array [xs] (list 'y2k.RT/into_array xs))
 (defmacro is [instance class] (list 'is* instance class))
 (defmacro js! [& body] (list 'comment body))
-(defmacro jvm! [& body] (concat (list 'module) body))
+(defmacro jvm! [& body] (concat (list 'do) body))
 (defmacro not= [a b] (list 'not (list '= a b)))
 (defmacro println [& xs] (concat (list 'y2k.RT/println) xs))
 (defmacro str [& xs] (concat (list 'y2k.RT/str) xs))
@@ -25,7 +25,7 @@
 (defmacro gen-class [& body] (list '__inject_raw_sexp (list 'gen-class* (list 'quote body))))
 (defmacro runnable [f] (list 'y2k.RT/runnable f))
 
-(defmacro class [cls_name] (list '__inject_raw_sexp (list 'class (quote cls_name))))
+;; (defmacro class [cls_name] (list '__inject_raw_sexp (list 'class (quote cls_name))))
 (defmacro class [cls] (list 'quote (symbol (str cls ".class"))))
 
 ;; Declarations
