@@ -1,5 +1,17 @@
 ;; Common
 
+(defmacro FIXME [& args]
+  (list 'throw
+        (list 'Exception.
+              (concat
+               (list
+                'str
+                (str "FIXME " __FILENAME__ ":" __LINE__ ":" (- __POSITION__ 1) " - "))
+               args))))
+
+(defmacro vector [& xs] (concat (list 'java.util.Arrays.asList) xs))
+(defmacro list [& xs] (list 'java.util.LinkedList. (concat (list 'java.util.Arrays.asList) xs)))
+
 (defmacro = [a b] (list 'java.util.Objects/equals a b))
 (defmacro def- [k v] (list 'def ^:private k v))
 (defmacro do [& xs] (concat (list 'let (vector)) xs))
