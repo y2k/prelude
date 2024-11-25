@@ -1,5 +1,33 @@
 ;; Common
 
+(defmacro FIXME [& args]
+  (list 'throw
+        (list 'Exception.
+              (concat
+               (list
+                'str
+                (str "FIXME " __FILENAME__ ":" __LINE__ ":" (- __POSITION__ 1) " - "))
+               args))))
+
+;; Collections
+
+(defmacro map? [x] (list 'is x 'java.util.Map))
+(defmacro list? [x] (list 'is x 'java.util.LinkedList))
+(defmacro vector? [x] (list 'is x 'java.util.ArrayList))
+
+(defmacro vector [& xs] (concat (list 'java.util.Arrays.asList) xs))
+(defmacro list [& xs] (list 'java.util.LinkedList. (concat (list 'java.util.Arrays.asList) xs)))
+
+(defmacro first [xs] (list 'get xs 0))
+(defmacro second [xs] (list 'get xs 1))
+(defmacro rest [xs]
+  (list '.subList
+        (list 'as xs 'java.util.List)
+        1
+        (list '.size (list 'as xs 'java.util.List))))
+
+;; Other
+
 (defmacro = [a b] (list 'java.util.Objects/equals a b))
 (defmacro def- [k v] (list 'def ^:private k v))
 (defmacro do [& xs] (concat (list 'let (vector)) xs))
