@@ -3,11 +3,21 @@ package y2k;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 public class RT {
+
+  // Add value immutable collection
+  public static Map<Object, Object> assoc(Object xs, Object k, Object v) {
+    var col = (Map<Object, Object>) xs;
+    var result = new HashMap<>(col);
+    result.put(k, v);
+    return result;
+  }
 
   public static boolean empty(Object xs) {
     return ((List) xs).isEmpty();

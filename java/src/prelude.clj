@@ -47,6 +47,7 @@
 
 ;; Java interop
 
+(defmacro assoc [xs k v] (list 'y2k.RT/assoc xs k v))
 (defmacro empty? [xs] (list 'y2k.RT/empty xs))
 (defmacro conj [xs x] (list 'y2k.RT/conj xs x))
 (defmacro as [instance class] (list 'as* instance class))
