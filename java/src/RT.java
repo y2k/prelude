@@ -9,6 +9,13 @@ import java.util.function.Supplier;
 
 public class RT {
 
+  public static List<Object> conj(Object xs, Object x) {
+    var col = (Collection<Object>) xs;
+    var result = new ArrayList<>(col);
+    result.add(x);
+    return result;
+  }
+
   public static Object[] into_array(Object xs) {
     var col = (List<Object>) xs;
     var result = (Object[]) Array.newInstance(col.get(0).getClass(), col.size());
