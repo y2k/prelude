@@ -9,6 +9,10 @@ import java.util.function.Supplier;
 
 public class RT {
 
+  public static boolean empty(Object xs) {
+    return ((List) xs).isEmpty();
+  }
+
   public static List<Object> conj(Object xs, Object x) {
     var col = (Collection<Object>) xs;
     var result = new ArrayList<>(col);

@@ -47,6 +47,7 @@
 
 ;; Java interop
 
+(defmacro empty? [xs] (list 'y2k.RT/empty xs))
 (defmacro conj [xs x] (list 'y2k.RT/conj xs x))
 (defmacro as [instance class] (list 'as* instance class))
 (defmacro checked! [f] (list 'y2k.RT/try_ (list 'fn (vector) f)))
