@@ -11,7 +11,14 @@ import java.util.function.Supplier;
 
 public class RT {
 
-  // Add value immutable collection
+  public static List<Object> concat(Object as, Object bs) {
+    var a = (List<Object>) as;
+    var b = (List<Object>) bs;
+    var result = new ArrayList<>(a);
+    result.addAll(b);
+    return result;
+  }
+
   public static Map<Object, Object> assoc(Object xs, Object k, Object v) {
     var col = (Map<Object, Object>) xs;
     var result = new HashMap<>(col);
