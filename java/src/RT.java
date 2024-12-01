@@ -7,9 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class RT {
+
+  public static <T, R> Function<T, R> function(Function<T, R> f) {
+    return f;
+  }
 
   public static Map<Object,Object> merge(Object as, Object bs) {
     var a = (Map<Object,Object>) as;
