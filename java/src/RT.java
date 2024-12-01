@@ -11,6 +11,14 @@ import java.util.function.Supplier;
 
 public class RT {
 
+  public static Map<Object,Object> merge(Object as, Object bs) {
+    var a = (Map<Object,Object>) as;
+    var b = (Map<Object,Object>) bs;
+    var result = new HashMap<>(a);
+    result.putAll(b);
+    return result;
+  }
+
   public static List<Object> concat(Object as, Object bs) {
     var a = (List<Object>) as;
     var b = (List<Object>) bs;

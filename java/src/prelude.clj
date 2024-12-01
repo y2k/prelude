@@ -47,6 +47,7 @@
 
 ;; Java interop
 
+(defmacro merge [as bs] (list 'y2k.RT/merge as bs))
 (defmacro concat [as bs] (list 'y2k.RT/concat as bs))
 (defmacro assoc [xs k v] (list 'y2k.RT/assoc xs k v))
 (defmacro empty? [xs] (list 'y2k.RT/empty xs))
