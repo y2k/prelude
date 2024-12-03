@@ -56,6 +56,12 @@ public class RT {
     return col.toArray(result);
   }
 
+  public static Object[] into_array(Class cls, Object xs) {
+    var col = (List<Object>) xs;
+    var result = (Object[]) Array.newInstance(cls, col.size());
+    return col.toArray(result);
+  }
+
   public static String str(Object... args) {
     if (args.length == 1) {
       return args[0].toString();

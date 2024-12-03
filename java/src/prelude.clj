@@ -33,6 +33,7 @@
 (defmacro do [& xs] (concat (list 'let (vector)) xs))
 (defmacro get [target key] (list 'y2k.RT/get target key))
 (defmacro into-array [xs] (list 'y2k.RT/into_array xs))
+(defmacro into-array2 [type xs] (list 'y2k.RT/into_array type xs))
 (defmacro is [instance class] (list 'is* instance class))
 (defmacro js! [& body] (list 'comment body))
 (defmacro jvm! [& body] (concat (list 'do) body))
