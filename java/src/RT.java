@@ -7,9 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class RT {
+
+  public static <T, R> Function<T, R> function(Function<T, R> f) {
+    return f;
+  }
 
   public static Map<Object,Object> merge(Object as, Object bs) {
     var a = (Map<Object,Object>) as;
@@ -48,6 +53,12 @@ public class RT {
   public static Object[] into_array(Object xs) {
     var col = (List<Object>) xs;
     var result = (Object[]) Array.newInstance(col.get(0).getClass(), col.size());
+    return col.toArray(result);
+  }
+
+  public static Object[] into_array(Class cls, Object xs) {
+    var col = (List<Object>) xs;
+    var result = (Object[]) Array.newInstance(cls, col.size());
     return col.toArray(result);
   }
 

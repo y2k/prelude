@@ -33,6 +33,7 @@
 (defmacro do [& xs] (concat (list 'let (vector)) xs))
 (defmacro get [target key] (list 'y2k.RT/get target key))
 (defmacro into-array [xs] (list 'y2k.RT/into_array xs))
+(defmacro into-array2 [type xs] (list 'y2k.RT/into_array type xs))
 (defmacro is [instance class] (list 'is* instance class))
 (defmacro js! [& body] (list 'comment body))
 (defmacro jvm! [& body] (concat (list 'do) body))
@@ -47,16 +48,18 @@
 
 ;; Java interop
 
-(defmacro merge [as bs] (list 'y2k.RT/merge as bs))
-(defmacro concat [as bs] (list 'y2k.RT/concat as bs))
-(defmacro assoc [xs k v] (list 'y2k.RT/assoc xs k v))
-(defmacro empty? [xs] (list 'y2k.RT/empty xs))
-(defmacro conj [xs x] (list 'y2k.RT/conj xs x))
 (defmacro as [instance class] (list 'as* instance class))
+(defmacro assoc [xs k v] (list 'y2k.RT/assoc xs k v))
 (defmacro checked! [f] (list 'y2k.RT/try_ (list 'fn (vector) f)))
+(defmacro concat [as bs] (list 'y2k.RT/concat as bs))
+(defmacro conj [xs x] (list 'y2k.RT/conj xs x))
+(defmacro empty? [xs] (list 'y2k.RT/empty xs))
 (defmacro fn! [& body] (concat (list ^void 'fn) body))
 (defmacro gen-class [& body] (list '__inject_raw_sexp (list 'gen-class* (list 'quote body))))
+(defmacro merge [as bs] (list 'y2k.RT/merge as bs))
+
 (defmacro runnable [f] (list 'y2k.RT/runnable f))
+(defmacro function [f] (list 'y2k.RT/function f))
 
 ;; (defmacro class [cls_name] (list '__inject_raw_sexp (list 'class (quote cls_name))))
 (defmacro class [cls] (list 'quote (symbol (str cls ".class"))))
