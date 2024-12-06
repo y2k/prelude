@@ -57,6 +57,7 @@
 (defmacro fn! [& body] (concat (list ^void 'fn) body))
 (defmacro gen-class [& body] (list '__inject_raw_sexp (list 'gen-class* (list 'quote body))))
 (defmacro merge [as bs] (list 'y2k.RT/merge as bs))
+(defmacro count [xs] (list 'y2k.RT/count xs))
 
 (defmacro runnable [f] (list 'y2k.RT/runnable f))
 (defmacro function [f] (list 'y2k.RT/function f))

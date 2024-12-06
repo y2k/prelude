@@ -12,6 +12,10 @@ import java.util.function.Supplier;
 
 public class RT {
 
+  public static int count(Object xs) {
+    return ((List) xs).size();
+  }
+
   public static <T, R> Function<T, R> function(Function<T, R> f) {
     return f;
   }
@@ -83,7 +87,7 @@ public class RT {
     if (source instanceof java.util.List) {
       return (T) ((java.util.List<?>) source).get((Integer) key);
     }
-    throw new RuntimeException("Unsupported source: " + source);
+    throw new RuntimeException("Unsupported source: " + source + ", key: " + key);
   }
 
   @SuppressWarnings("unchecked")
