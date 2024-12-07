@@ -12,6 +12,14 @@ import java.util.function.Supplier;
 
 public class RT {
 
+  public static Map<Object, Object> hash_map(Object... args) {
+    var result = new HashMap<Object, Object>();
+    for (int i = 0; i < args.length; i += 2) {
+      result.put(args[i], args[i + 1]);
+    }
+    return result;
+  }
+
   public static int count(Object xs) {
     return ((List) xs).size();
   }
@@ -20,9 +28,9 @@ public class RT {
     return f;
   }
 
-  public static Map<Object,Object> merge(Object as, Object bs) {
-    var a = (Map<Object,Object>) as;
-    var b = (Map<Object,Object>) bs;
+  public static Map<Object, Object> merge(Object as, Object bs) {
+    var a = (Map<Object, Object>) as;
+    var b = (Map<Object, Object>) bs;
     var result = new HashMap<>(a);
     result.putAll(b);
     return result;
