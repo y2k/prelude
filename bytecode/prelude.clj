@@ -11,6 +11,7 @@
 (def if 0)
 (def list 0)
 (def null 0)
+(def println 0)
 (def reset! 0)
 (def str 0)
 (def true 0)

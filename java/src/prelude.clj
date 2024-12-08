@@ -59,6 +59,7 @@
 (defmacro merge [as bs] (list 'y2k.RT/merge as bs))
 (defmacro count [xs] (list 'y2k.RT/count xs))
 (defmacro hash-map [& xs] (concat (list 'y2k.RT/hash_map) xs))
+(defmacro nil? [x] (list '= 'null x))
 
 (defmacro runnable [f] (list 'y2k.RT/runnable f))
 (defmacro function [f] (list 'y2k.RT/function f))
