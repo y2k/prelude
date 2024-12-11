@@ -18,7 +18,6 @@
 (defmacro rest [xs] (list '.toSpliced (list '.from 'Array xs) 0 1))
 (defmacro second [xs] (list 'get (list '.from 'Array xs) 1))
 (defmacro str [& args] (concat (list '+ "") args))
-(defmacro nil? [x] (list '__raw_template "" x " == null"))
 (defmacro some? [x] (list 'not (list 'nil? x)))
 (defmacro string? [x] (list '= :string (list 'type x)))
 (defmacro number? [x] (list '= :number (list 'type x)))
@@ -80,6 +79,7 @@
 (defmacro type [x] (list '__raw_template "typeof " x))
 
 ;; JS prelude
+;; (def quote 0)
 (def __raw_template 0)
 (def . 0)
 (def assoc 0)
@@ -88,19 +88,22 @@
 (def do 0)
 (def false 0)
 (def fn* 0)
+(def hash-map 0)
 (def let* 0)
 (def new 0)
+(def ns 0)
 (def null 0)
-(def quote 0)
+(def set 0)
+(def set! 0)
+(def spread 0)
 (def true 0)
 (def try 0)
 (def vector 0)
 (def while 0)
-(def set 0)
 
-(defmacro quote [n]
-  {:__y2k_type :quote
-   :value (str n)})
+;; (defmacro quote [n]
+;;   {:__y2k_type :quote
+;;    :value (str n)})
 
 (defmacro quote_of_string [n]
   {:__y2k_type :quote
@@ -109,11 +112,11 @@
 (defmacro quote? [x]
   (list '= :quote (list '.-__y2k_type x)))
 
-(defmacro vector [& args]
-  (concat
-   (list '__raw_template "[")
-   (transform_nodes {:sep ","} args)
-   (list "]")))
+;; (defmacro vector [& args]
+;;   (concat
+;;    (list '__raw_template "[")
+;;    (transform_nodes {:sep ","} args)
+;;    (list "]")))
 
 (defmacro list [& args]
   (list 'let ['xs (concat (list 'vector) args)]

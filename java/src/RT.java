@@ -12,6 +12,15 @@ import java.util.function.Supplier;
 
 public class RT {
 
+  public static List<Object> rest(Object xs) {
+    var col = (List<Object>) xs;
+    return col.subList(1, col.size());
+  }
+
+  public static boolean equals(Object a, Object b) {
+    return java.util.Objects.equals(a, b);
+  }
+
   public static Map<Object, Object> hash_map(Object... args) {
     var result = new HashMap<Object, Object>();
     for (int i = 0; i < args.length; i += 2) {
