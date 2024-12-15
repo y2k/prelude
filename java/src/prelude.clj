@@ -11,20 +11,14 @@
 
 ;; Collections
 
-(defmacro map? [x] (list 'is x 'java.util.Map))
-(defmacro list? [x] (list 'is x 'java.util.LinkedList))
-(defmacro vector? [x] (list 'is x 'java.util.ArrayList))
+(defmacro map? [x] (list 'is x "java.util.Map"))
+(defmacro list? [x] (list 'is x "java.util.LinkedList"))
+(defmacro vector? [x] (list 'is x "java.util.ArrayList"))
 
-;; (defmacro vector [& xs] (concat (list 'java.util.Arrays.asList) xs))
-(defmacro list [& xs] (list 'java.util.LinkedList. (concat (list 'java.util.Arrays.asList) xs)))
+(defmacro list [& xs] (list 'java.util.LinkedList. (concat (list 'java.util.Arrays/asList) xs)))
 
 (defmacro first [xs] (list 'get xs 0))
 (defmacro second [xs] (list 'get xs 1))
-;; (defmacro rest [xs]
-;;   (list '.subList
-;;         (list 'as xs 'java.util.List)
-;;         1
-;;         (list '.size (list 'as xs 'java.util.List))))
 
 ;; Other
 
@@ -47,26 +41,21 @@
 
 ;; Java interop
 
-;; (defmacro as [instance class] (list 'as* instance class))
-;; (defmacro hash-map [& xs] (concat (list 'call-runtime (list 'quote 'hash_map)) xs))
-;; (defmacro is [instance class] (list 'is* instance class))
 (defmacro assoc [xs k v] (list 'call-runtime ''assoc xs k v))
 (defmacro checked! [f] (list 'call-runtime ''try_ (list 'fn (vector) f)))
+(defmacro class [cls] (list 'class-inner (list 'quote (symbol (str cls ".class")))))
 (defmacro concat [as bs] (list 'call-runtime ''concat as bs))
 (defmacro conj [xs x] (list 'call-runtime ''conj xs x))
 (defmacro count [xs] (list 'call-runtime ''count xs))
+(defmacro declare [name] (list 'def name))
 (defmacro empty? [xs] (list 'call-runtime ''empty xs))
 (defmacro fn! [& body] (concat (list ^void 'fn) body))
+(defmacro function [f] (list 'call-runtime ''function f))
 (defmacro gen-class [& body] (list 'gen-class-inner (list 'quote body)))
 (defmacro merge [as bs] (list 'call-runtime ''merge as bs))
 (defmacro nil? [x] (list '= 'null x))
 (defmacro rest [xs] (list 'call-runtime ''rest xs))
-
 (defmacro runnable [f] (list 'call-runtime ''runnable f))
-(defmacro function [f] (list 'call-runtime ''function f))
-
-;; (defmacro class [cls_name] (list '__inject_raw_sexp (list 'class (quote cls_name))))
-(defmacro class [cls] (list 'class-inner (list 'quote (symbol (str cls ".class")))))
 
 ;; Declarations
 
@@ -110,6 +99,6 @@
 
 ;; Declarations Java
 
-;; (def ClassLoader 0)
-;; (def Object 0)
+(def Object 0)
 (def String 0)
+(def boolean 0)

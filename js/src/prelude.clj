@@ -1,3 +1,26 @@
+;; JS prelude
+;; (def quote 0)
+(def __raw_template 0)
+(def . 0)
+(def assoc 0)
+(def catch 0)
+(def comment 0)
+(def do 0)
+(def false 0)
+(def fn* 0)
+(def hash-map 0)
+(def let* 0)
+(def new 0)
+(def ns 0)
+(def null 0)
+(def set 0)
+(def set! 0)
+(def spread 0)
+(def true 0)
+(def try 0)
+(def vector 0)
+(def while 0)
+
 (defmacro FIXME [& args]
   (list 'throw
         (list 'Error.
@@ -77,29 +100,6 @@
 ;; (defmacro spread [a] (list '__raw_template "..." a))
 (defmacro throw [ex] (list '__raw_template "(function(){throw " ex "})()"))
 (defmacro type [x] (list '__raw_template "typeof " x))
-
-;; JS prelude
-;; (def quote 0)
-(def __raw_template 0)
-(def . 0)
-(def assoc 0)
-(def catch 0)
-(def comment 0)
-(def do 0)
-(def false 0)
-(def fn* 0)
-(def hash-map 0)
-(def let* 0)
-(def new 0)
-(def ns 0)
-(def null 0)
-(def set 0)
-(def set! 0)
-(def spread 0)
-(def true 0)
-(def try 0)
-(def vector 0)
-(def while 0)
 
 ;; (defmacro quote [n]
 ;;   {:__y2k_type :quote
