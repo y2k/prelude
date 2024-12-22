@@ -16,6 +16,7 @@
 (defmacro vector? [x] (list 'is x "java.util.ArrayList"))
 
 (defmacro list [& xs] (list 'java.util.LinkedList. (concat (list 'java.util.Arrays/asList) xs)))
+(defmacro vec [xs] (list 'java.util.Arrays/asList xs))
 
 (defmacro first [xs] (list 'get xs 0))
 (defmacro second [xs] (list 'get xs 1))
