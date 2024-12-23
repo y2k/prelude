@@ -12,6 +12,15 @@ import java.util.function.Supplier;
 
 public class RT {
 
+  public static Object run_(Object farg, Object xs) {
+    var f = (Function<Object, Object>) farg;
+    var col = (List<Object>) xs;
+    for (Object x : col) {
+      f.apply(x);
+    }
+    return null;
+  }
+
   public static List<Object> rest(Object xs) {
     var col = (List<Object>) xs;
     return col.subList(1, col.size());
