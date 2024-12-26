@@ -11,15 +11,14 @@
 
 ;; Collections
 
-(defmacro map? [x] (list 'is x "java.util.Map"))
-(defmacro list? [x] (list 'is x "java.util.LinkedList"))
-(defmacro vector? [x] (list 'is x "java.util.ArrayList"))
-
-(defmacro list [& xs] (list 'java.util.LinkedList. (concat (list 'java.util.Arrays/asList) xs)))
-(defmacro vec [xs] (list 'java.util.Arrays/asList xs))
-
 (defmacro first [xs] (list 'get xs 0))
+(defmacro list [& xs] (list 'java.util.LinkedList. (concat (list 'java.util.Arrays/asList) xs)))
+(defmacro list? [x] (list 'is x "java.util.LinkedList"))
+(defmacro map? [x] (list 'is x "java.util.Map"))
+(defmacro run! [f xs] (list 'call-runtime ''run_ f xs))
 (defmacro second [xs] (list 'get xs 1))
+(defmacro vec [xs] (list 'java.util.Arrays/asList xs))
+(defmacro vector? [x] (list 'is x "java.util.ArrayList"))
 
 ;; Other
 
@@ -27,6 +26,10 @@
 (defmacro def- [k v] (list 'def ^:private k v))
 (defmacro do [& xs] (concat (list 'let (vector)) xs))
 (defmacro get [target key] (list 'call-runtime ''get target key))
+(defmacro get3 [target key default]
+  (list 'let ['result (list 'get target key)]
+        (list 'if (list '= 'null 'result) default 'result)))
+
 (defmacro into-array [xs] (list 'call-runtime ''into_array xs))
 (defmacro into-array2 [type xs] (list 'call-runtime ''into_array type xs))
 (defmacro js! [& body] (list 'comment body))
@@ -55,6 +58,7 @@
 (defmacro gen-class [& body] (list 'gen-class-inner (list 'quote body)))
 (defmacro merge [as bs] (list 'call-runtime ''merge as bs))
 (defmacro nil? [x] (list '= 'null x))
+(defmacro some? [x] (list 'not (list '= 'null x)))
 (defmacro rest [xs] (list 'call-runtime ''rest xs))
 (defmacro runnable [f] (list 'call-runtime ''runnable f))
 
