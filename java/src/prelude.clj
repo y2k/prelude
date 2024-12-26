@@ -102,4 +102,5 @@
 
 (def Object 0)
 (def String 0)
+(def int 0)
 (def boolean 0)

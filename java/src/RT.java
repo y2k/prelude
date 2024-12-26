@@ -10,7 +10,49 @@ import java.util.concurrent.Callable;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unchecked")
 public class RT {
+
+  abstract static class Fn implements Runnable {
+    public Object invoke() {
+      return invoke(null);
+    }
+
+    public Object invoke(Object a1) {
+      return invoke(a1, null);
+    }
+
+    public Object invoke(Object a1, Object a2) {
+      return invoke(a1, a2, null);
+    }
+
+    public Object invoke(Object a1, Object a2, Object a3) {
+      return invoke(a1, a2, a3, null);
+    }
+
+    public Object invoke(Object a1, Object a2, Object a3, Object a4) {
+      return null;
+    }
+
+    public void run() {
+      invoke();
+    }
+  }
+
+  public static Object invoke(Object f, Object... args) {
+    var fn = (Fn) f;
+    if (args.length == 0)
+      return fn.invoke();
+    if (args.length == 1)
+      return fn.invoke(args[0]);
+    if (args.length == 2)
+      return fn.invoke(args[0], args[1]);
+    if (args.length == 3)
+      return fn.invoke(args[0], args[1], args[2]);
+    if (args.length == 4)
+      return fn.invoke(args[0], args[1], args[2], args[3]);
+    throw new RuntimeException("Unsupported arity: " + args.length);
+  }
 
   public static List<Object> rest(Object xs) {
     var col = (List<Object>) xs;
@@ -30,7 +72,7 @@ public class RT {
   }
 
   public static int count(Object xs) {
-    return ((List) xs).size();
+    return ((List<Object>) xs).size();
   }
 
   public static <T, R> Function<T, R> function(Function<T, R> f) {
@@ -61,7 +103,7 @@ public class RT {
   }
 
   public static boolean empty(Object xs) {
-    return ((List) xs).isEmpty();
+    return ((List<Object>) xs).isEmpty();
   }
 
   public static List<Object> conj(Object xs, Object x) {
@@ -77,7 +119,7 @@ public class RT {
     return col.toArray(result);
   }
 
-  public static Object[] into_array(Class cls, Object xs) {
+  public static Object[] into_array(Class<?> cls, Object xs) {
     var col = (List<Object>) xs;
     var result = (Object[]) Array.newInstance(cls, col.size());
     return col.toArray(result);
@@ -94,9 +136,6 @@ public class RT {
     return sb.toString();
   }
 
-  /**
-   * @noinspection unchecked
-   */
   public static <T> T get(Object source, Object key) {
     if (source instanceof java.util.Map) {
       return (T) ((java.util.Map<?, ?>) source).get(key);
