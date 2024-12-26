@@ -7,13 +7,35 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unchecked")
 public class RT {
 
-  abstract static class Fn implements Runnable {
+  public interface Fn0 {
+    Object invoke();
+  }
+
+  public interface Fn1 {
+    Object invoke(Object a1);
+  }
+
+  public interface Fn2 {
+    Object invoke(Object a1, Object a2);
+  }
+
+  public interface Fn3 {
+    Object invoke(Object a1, Object a2, Object a3);
+  }
+
+  public interface Fn4 {
+    Object invoke(Object a1, Object a2, Object a3, Object a4);
+  }
+
+  public static class Fn implements Runnable, Callable<Object>, Consumer<Object>, Function<Object, Object>,
+      Supplier<Object>, Fn0, Fn1, Fn2, Fn3, Fn4 {
     public Object invoke() {
       return invoke(null);
     }
@@ -31,12 +53,76 @@ public class RT {
     }
 
     public Object invoke(Object a1, Object a2, Object a3, Object a4) {
-      return null;
+      throw new RuntimeException("Not implemented");
     }
 
-    public void run() {
+    public final void run() {
       invoke();
     }
+
+    public final Object call() {
+      return invoke();
+    }
+
+    @Override
+    public final void accept(Object t) {
+      invoke(t);
+    }
+
+    @Override
+    public final Object apply(Object t) {
+      return invoke(t);
+    }
+
+    @Override
+    public final Object get() {
+      return invoke();
+    }
+  }
+
+  public static Fn fn(Fn0 f) {
+    return new Fn() {
+      @Override
+      public Object invoke() {
+        return f.invoke();
+      }
+    };
+  }
+
+  public static Fn fn(Fn1 f) {
+    return new Fn() {
+      @Override
+      public Object invoke(Object a1) {
+        return f.invoke(a1);
+      }
+    };
+  }
+
+  public static Fn fn(Fn2 f) {
+    return new Fn() {
+      @Override
+      public Object invoke(Object a1, Object a2) {
+        return f.invoke(a1, a2);
+      }
+    };
+  }
+
+  public static Fn fn(Fn3 f) {
+    return new Fn() {
+      @Override
+      public Object invoke(Object a1, Object a2, Object a3) {
+        return f.invoke(a1, a2, a3);
+      }
+    };
+  }
+
+  public static Fn fn(Fn4 f) {
+    return new Fn() {
+      @Override
+      public Object invoke(Object a1, Object a2, Object a3, Object a4) {
+        return f.invoke(a1, a2, a3, a4);
+      }
+    };
   }
 
   public static Object invoke(Object f, Object... args) {
