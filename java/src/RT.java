@@ -15,27 +15,27 @@ import java.util.function.Supplier;
 public class RT {
 
   public interface Fn0 {
-    Object invoke();
+    Object invoke() throws Exception;
   }
 
   public interface Fn1 {
-    Object invoke(Object a1);
+    Object invoke(Object a1) throws Exception;
   }
 
   public interface Fn2 {
-    Object invoke(Object a1, Object a2);
+    Object invoke(Object a1, Object a2) throws Exception;
   }
 
   public interface Fn3 {
-    Object invoke(Object a1, Object a2, Object a3);
+    Object invoke(Object a1, Object a2, Object a3) throws Exception;
   }
 
   public interface Fn4 {
-    Object invoke(Object a1, Object a2, Object a3, Object a4);
+    Object invoke(Object a1, Object a2, Object a3, Object a4) throws Exception;
   }
 
-  public static class Fn implements Runnable, Callable<Object>, Consumer<Object>, Function<Object, Object>,
-      Supplier<Object>, Fn0, Fn1, Fn2, Fn3, Fn4 {
+  public static class Fn<TI, TR> implements Runnable, Callable<TR>, Consumer<TI>, Function<TI, TR>,
+      Supplier<TR>, Fn0, Fn1, Fn2, Fn3, Fn4 {
     public Object invoke() {
       return invoke(null);
     }
@@ -60,23 +60,23 @@ public class RT {
       invoke();
     }
 
-    public final Object call() {
-      return invoke();
+    public final TR call() {
+      return (TR) invoke();
     }
 
     @Override
-    public final void accept(Object t) {
+    public final void accept(TI t) {
       invoke(t);
     }
 
     @Override
-    public final Object apply(Object t) {
-      return invoke(t);
+    public final TR apply(TI t) {
+      return (TR) invoke(t);
     }
 
     @Override
-    public final Object get() {
-      return invoke();
+    public final TR get() {
+      return (TR) invoke();
     }
   }
 
@@ -84,7 +84,11 @@ public class RT {
     return new Fn() {
       @Override
       public Object invoke() {
-        return f.invoke();
+        try {
+          return f.invoke();
+        } catch (Exception e) {
+          return throw_(e);
+        }
       }
     };
   }
@@ -93,7 +97,11 @@ public class RT {
     return new Fn() {
       @Override
       public Object invoke(Object a1) {
-        return f.invoke(a1);
+        try {
+          return f.invoke(a1);
+        } catch (Exception e) {
+          return throw_(e);
+        }
       }
     };
   }
@@ -102,7 +110,11 @@ public class RT {
     return new Fn() {
       @Override
       public Object invoke(Object a1, Object a2) {
-        return f.invoke(a1, a2);
+        try {
+          return f.invoke(a1, a2);
+        } catch (Exception e) {
+          return throw_(e);
+        }
       }
     };
   }
@@ -111,7 +123,11 @@ public class RT {
     return new Fn() {
       @Override
       public Object invoke(Object a1, Object a2, Object a3) {
-        return f.invoke(a1, a2, a3);
+        try {
+          return f.invoke(a1, a2, a3);
+        } catch (Exception e) {
+          return throw_(e);
+        }
       }
     };
   }
@@ -120,7 +136,11 @@ public class RT {
     return new Fn() {
       @Override
       public Object invoke(Object a1, Object a2, Object a3, Object a4) {
-        return f.invoke(a1, a2, a3, a4);
+        try {
+          return f.invoke(a1, a2, a3, a4);
+        } catch (Exception e) {
+          return throw_(e);
+        }
       }
     };
   }
@@ -253,9 +273,9 @@ public class RT {
     return null;
   }
 
-  public static <T> T try_(Callable<T> f) {
+  public static <T> T try_(Object f) {
     try {
-      return f.call();
+      return (T) ((Fn) f).invoke();
     } catch (Exception e) {
       RT.throwException(e, null);
       return null;
