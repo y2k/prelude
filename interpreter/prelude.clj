@@ -8,6 +8,7 @@
 (def = 0)
 (def concat 0)
 (def count 0)
+(def drop 0)
 (def false 0)
 (def FIXME 0)
 (def get 0)
