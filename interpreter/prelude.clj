@@ -15,6 +15,7 @@
 (def hash-map 0)
 (def if 0)
 (def list 0)
+(def map 0)
 (def map? 0)
 (def null 0)
 (def println 0)
