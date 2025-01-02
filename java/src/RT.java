@@ -169,6 +169,16 @@ public class RT {
     return null;
   }
 
+  public static List<Object> map(Object f, Object xs) {
+    var col = (List<Object>) xs;
+    var result = new ArrayList<Object>(col.size());
+    var func = (Function<Object, Object>) f;
+    for (Object x : col) {
+      result.add(func.apply(x));
+    }
+    return result;
+  }
+
   public static List<Object> rest(Object xs) {
     var col = (List<Object>) xs;
     return col.subList(1, col.size());
