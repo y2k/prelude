@@ -170,7 +170,7 @@ public class RT {
   }
 
   public static List<Object> map(Object f, Object xs) {
-    var col = (List<Object>) xs;
+    var col = (Collection<Object>) xs;
     var result = new ArrayList<Object>(col.size());
     var func = (Function<Object, Object>) f;
     for (Object x : col) {
