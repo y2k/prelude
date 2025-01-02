@@ -169,6 +169,16 @@ public class RT {
     return null;
   }
 
+  public static Object reduce(Object f, Object def, Object xs) {
+    var col = (Collection<Object>) xs;
+    var func = (Fn<Object, Object>) f;
+    var acc = def;
+    for (Object x : col) {
+      acc = func.invoke(acc, x);
+    }
+    return acc;
+  }
+
   public static List<Object> map(Object f, Object xs) {
     var col = (Collection<Object>) xs;
     var result = new ArrayList<Object>(col.size());
